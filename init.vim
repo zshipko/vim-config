@@ -38,7 +38,6 @@ Plug 'let-def/vimbufsync'
 Plug 'Rip-Rip/clang_complete'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
-Plug 'marcopaganini/mojave-vim-theme'
 call plug#end()
 
 filetype plugin on
@@ -114,10 +113,7 @@ set backupdir=/tmp
 set mouse=a
 
 " Colorscheme
-colorscheme mojave
-if !has('gui_running')
-    set t_Co=256
-endif
+colorscheme newdefault
 
 " Status bar
 set laststatus=2
@@ -158,3 +154,9 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Jedi (Python)
 let g:jedi#popup_on_dot = 0
+
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
