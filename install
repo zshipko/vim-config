@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 
 UNAME=$(uname)
+VIM=${VIM-vim}
+NVIM=${NVIM-nvim}
 
 case $UNAME in
     *BSD)
@@ -15,7 +17,11 @@ case $1 in
     vim)
         mkdir -p ~/.vim
         cp init.vim ~/.vimrc
-        vim +'PlugInstall --sync' +qa
+        $VIM +'PlugInstall --sync' +qa
+        if [ ! -f ~/.vim/plugged/clang_complete/.modified ]; then
+            sed -i "s/vim/$VIM/g" ~/.vim/plugged/clang_complete/Makefile
+            touch ~/.vim/plugged/clang_complete/.modified
+        fi
         cd ~/.vim/plugged/clang_complete && \
             $MAKE && \
             $MAKE install
@@ -23,9 +29,9 @@ case $1 in
     nvim|neovim)
         mkdir -p ~/.config/nvim
         cp init.vim ~/.config/nvim
-        nvim +'PlugInstall --sync' +qa
+        $NVIM +'PlugInstall --sync' +qa
         if [ ! -f ~/.config/nvim/plugged/clang_complete/.modified ]; then
-            sed -i 's/vim/nvim/g' ~/.config/nvim/plugged/clang_complete
+            sed -i "s/vim/$NVIM/g" ~/.config/nvim/plugged/clang_complete/Makefile
             touch ~/.config/nvim/plugged/clang_complete/.modified
         fi
         cd ~/.config/nvim/plugged/clang_complete && \
