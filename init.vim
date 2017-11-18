@@ -38,6 +38,7 @@ Plug 'let-def/vimbufsync'
 Plug 'Rip-Rip/clang_complete'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
+Plug 'vim-scripts/a.vim'
 call plug#end()
 
 filetype plugin on
@@ -143,8 +144,12 @@ map <C-f> :NERDTreeToggle<CR>
 let b:syntastic_cpp_cflags = ' -I/usr/local/include -I `ocamlc -where` `pkg-config --cflags python3`'
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 let b:syntastic_c_cflags = ' -I/usr/local/include -std=c99 -I `ocamlc -where` `pkg-config --cflags python3` -I/usr/include/python3m'
-let g:syntastic_mode_map = {"mode": "passive", "active_filetypes": ["c"]}
 
+" Uncomment the following line to disable syntastic at startup
+"let g:syntastic_mode_map = {"mode": "passive"}
+
+map <C-m> :SyntasticToggleMode<CR>
+map <C-k> :SyntasticCheck<CR>
 nmap <F8> :TagbarToggle<CR>
 
 " Merlin (OCaml)
@@ -154,9 +159,3 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Jedi (Python)
 let g:jedi#popup_on_dot = 0
-
-
-function! SynGroup()
-    let l:s = synID(line('.'), col('.'), 1)
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfun

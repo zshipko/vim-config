@@ -84,7 +84,7 @@ hi Operator guifg=#a0a0ff guibg=NONE guisp=NONE gui=NONE ctermfg=147 ctermbg=NON
 hi Define guifg=#a0e0a0 guibg=NONE guisp=NONE gui=NONE ctermfg=114 ctermbg=NONE cterm=NONE
 hi Function guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=15 ctermbg=NONE cterm=NONE
 hi PreProc guifg=#a0e0a0 guibg=NONE guisp=NONE gui=NONE ctermfg=114 ctermbg=NONE cterm=NONE
-hi Visual guifg=#404040 guibg=NONE guisp=NONE gui=NONE ctermfg=238 ctermbg=NONE cterm=NONE
+hi Visual guifg=#404040 guibg=#ffffff guisp=NONE gui=NONE ctermfg=238 ctermbg=255 cterm=NONE
 hi VertSplit guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=15 ctermbg=NONE cterm=NONE
 hi Exception guifg=#a0a0ff guibg=NONE guisp=NONE gui=NONE ctermfg=147 ctermbg=NONE cterm=NONE
 hi Keyword guifg=#a0a0ff guibg=NONE guisp=NONE gui=NONE ctermfg=147 ctermbg=NONE cterm=NONE
