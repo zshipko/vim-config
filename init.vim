@@ -38,10 +38,12 @@ Plug 'let-def/vimbufsync'
 Plug 'Rip-Rip/clang_complete'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
+Plug 'marcopaganini/mojave-vim-theme'
 call plug#end()
 
 filetype plugin on
 filetype indent on
+syntax enable
 
 set noerrorbells visualbell t_vb= "dont beep
 
@@ -111,13 +113,15 @@ set backupdir=/tmp
 " Enable mouse
 set mouse=a
 
-" Status bar
-set laststatus=2
+" Colorscheme
+colorscheme mojave
 if !has('gui_running')
     set t_Co=256
-else
-    colo desert
 endif
+
+" Status bar
+set laststatus=2
+
 
 let g:lightline = {
       \ 'active': {
