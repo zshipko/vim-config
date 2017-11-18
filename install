@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+
+UNAME=$(uname)
+
+case $UNAME in
+    *BSD)
+        MAKE=gmake
+        ;;
+    *)
+        MAKE=make
+        ;;
+esac
+
+case $1 in
+    vim)
+        mkdir -p ~/.vim
+        cp init.vim ~/.vimrc
+        vim +'PlugInstall --sync' +qa
+        cd ~/.vim/plugged/clang_complete && \
+            $MAKE && \
+            $MAKE install
+        ;;
+    nvim|neovim)
+        mkdir -p ~/.config/nvim
+        cp init.vim ~/.config/nvim
+        nvim +'PlugInstall --sync' +qa
+        if [ ! -f ~/.config/nvim/plugged/clang_complete/.modified ]; then
+            sed -i 's/vim/nvim/g' ~/.config/nvim/plugged/clang_complete
+            touch ~/.config/nvim/plugged/clang_complete/.modified
+        fi
+        cd ~/.config/nvim/plugged/clang_complete && \
+            $MAKE && \
+            $MAKE install
+        ;;
+    all|both)
+        $0 vim
+        $0 neovim
+        ;;
+    *)
+        echo "Invalid vim executable name"
+        ;;
+esac
