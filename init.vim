@@ -135,9 +135,10 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " NerdTree
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+if argc() == 0 && !exists("s:std_in")
+    autocmd VimEnter * NERDTree
+endif
 map <C-f> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 let b:syntastic_cpp_cflags = ' -I/usr/local/include -I `ocamlc -where` `pkg-config --cflags python3`'
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
