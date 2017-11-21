@@ -30,7 +30,6 @@ endif
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ervandew/supertab'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'davidhalter/jedi-vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
@@ -39,6 +38,9 @@ Plug 'Rip-Rip/clang_complete'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go'
 call plug#end()
 
 filetype plugin on
