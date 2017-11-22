@@ -40,7 +40,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go'
 call plug#end()
 
 filetype plugin on
