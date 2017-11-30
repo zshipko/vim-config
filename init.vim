@@ -40,6 +40,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'rust-lang/rust.vim'
+Plug 'bohlender/vim-z3-smt2'
 call plug#end()
 
 filetype plugin on
