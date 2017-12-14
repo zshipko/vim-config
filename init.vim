@@ -143,7 +143,7 @@ if argc() == 0 && !exists("s:std_in")
 endif
 map <C-f> :NERDTreeToggle<CR>
 
-let b:syntastic_cpp_cflags = ' -I/usr/local/include -I `ocamlc -where` `pkg-config --cflags python3`'
+let b:syntastic_cpp_cflags = ' -std=c++11 -I/usr/local/include -I `ocamlc -where` `pkg-config --cflags python3`'
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 let b:syntastic_c_cflags = ' -I/usr/local/include -std=c99 -I `ocamlc -where` `pkg-config --cflags python3` -I/usr/include/python3m'
 
