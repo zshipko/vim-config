@@ -41,6 +41,7 @@ Plug 'vim-scripts/a.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'bohlender/vim-z3-smt2'
+Plug 'racer-rust/vim-racer'
 call plug#end()
 
 filetype plugin on
@@ -155,9 +156,9 @@ map <C-k> :SyntasticCheck<CR>
 nmap <F8> :TagbarToggle<CR>
 
 " Merlin (OCaml)
-au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Jedi (Python)
 let g:jedi#popup_on_dot = 0
