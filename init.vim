@@ -42,6 +42,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'bohlender/vim-z3-smt2'
 Plug 'racer-rust/vim-racer'
+Plug 'jakwings/vim-pony'
 call plug#end()
 
 filetype plugin on
