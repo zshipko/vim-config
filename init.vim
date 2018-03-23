@@ -98,6 +98,8 @@ set expandtab
 set smarttab
 set shiftwidth=4
 set tabstop=4
+autocmd FileType ocaml set tabstop=2|set shiftwidth=2|set expandtab
+
 
 " Use tabs in Makefiles
 autocmd FileType make setlocal noexpandtab
