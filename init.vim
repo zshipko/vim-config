@@ -26,11 +26,10 @@ else
     " Begin Plug block
     call plug#begin('~/.vim/plugged')
 endif
-
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ervandew/supertab'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'vim-syntastic/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'let-def/vimbufsync'
@@ -148,21 +147,14 @@ if argc() == 0 && !exists("s:std_in")
 endif
 map <C-f> :NERDTreeToggle<CR>
 
-let b:syntastic_cpp_cflags = ' -std=c++11 -I/usr/local/include -I `ocamlc -where` `pkg-config --cflags python3`'
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-let b:syntastic_c_cflags = ' -I/usr/local/include -std=c99 -I `ocamlc -where` `pkg-config --cflags python3` -I/usr/include/python3m'
-
-" Uncomment the following line to disable syntastic at startup
-"let g:syntastic_mode_map = {"mode": "passive"}
-
 map <C-m> :SyntasticToggleMode<CR>
 map <C-k> :SyntasticCheck<CR>
 nmap <F8> :TagbarToggle<CR>
 
 " Merlin (OCaml)
-" au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-" execute "set rtp+=" . g:opamshare . "/merlin/vim"
+au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Jedi (Python)
 let g:jedi#popup_on_dot = 0
