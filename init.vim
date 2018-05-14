@@ -152,9 +152,13 @@ map <C-k> :SyntasticCheck<CR>
 nmap <F8> :TagbarToggle<CR>
 
 " Merlin (OCaml)
-au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+if executable('opam')
+    au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+    execute "set rtp+=" . g:opamshare . "/merlin/vim"
+    let g:syntastic_ocaml_checkers = ['merlin']
+    map <Leader>d :MerlinLocate<CR>
+endif
 
 " Jedi (Python)
 let g:jedi#popup_on_dot = 0
