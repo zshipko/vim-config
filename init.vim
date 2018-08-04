@@ -43,6 +43,7 @@ Plug 'bohlender/vim-z3-smt2'
 Plug 'racer-rust/vim-racer'
 Plug 'jakwings/vim-pony'
 Plug 'fatih/vim-go'
+Plug 'rhysd/vim-llvm'
 call plug#end()
 
 filetype plugin on
