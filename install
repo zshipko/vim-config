@@ -44,6 +44,10 @@ case $1 in
         $0 vim
         $0 neovim
         ;;
+    deps)
+        cargo install racer
+        opam install ocp-indent ocamlformat merlin
+        ;;
     *)
         echo "Invalid vim executable name"
         ;;
