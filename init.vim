@@ -171,7 +171,6 @@ augroup fmt
 augroup END
 
 " ale
-let g:aloe_completion_enabled = 1
-let g:ale_linters = {'c': ['clang'], 'c++': ['clang'], 'ocaml': ['merlin']}
-let g:ale_linters = {'c': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat']}
-let g:ale_c_clang_options = '-std=c11 -Wall -I/usr/local/include -I~/devel/halide/include -I~/devel/halide/tools'
+let g:ale_completion_enabled = 1
+let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc'], 'ocaml': ['merlin']}
+let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat']}
