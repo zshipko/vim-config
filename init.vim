@@ -39,9 +39,9 @@ Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'rust-lang/rust.vim'
-Plug 'bohlender/vim-z3-smt2'
 Plug 'racer-rust/vim-racer'
-Plug 'jakwings/vim-pony'
+Plug 'bohlender/vim-z3-smt2'
+Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
 call plug#end()
 
@@ -159,6 +159,19 @@ if executable('opam')
     let g:syntastic_ocaml_checkers = ['merlin']
     map <Leader>d :MerlinLocate<CR>
 endif
+set rtp^="/home/zach/.opam/4.07.0/share/ocp-indent/vim"
 
 " Jedi (Python)
 let g:jedi#popup_on_dot = 0
+
+" Neoformat
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
+
+" ale
+let g:aloe_completion_enabled = 1
+let g:ale_linters = {'c': ['clang'], 'c++': ['clang'], 'ocaml': ['merlin']}
+let g:ale_linters = {'c': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat']}
+let g:ale_c_clang_options = '-std=c11 -Wall -I/usr/local/include -I~/devel/halide/include -I~/devel/halide/tools'
