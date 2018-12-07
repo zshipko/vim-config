@@ -43,6 +43,7 @@ Plug 'racer-rust/vim-racer'
 Plug 'bohlender/vim-z3-smt2'
 Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
+Plug 'whonore/Coqtail'
 call plug#end()
 
 filetype plugin on
@@ -151,6 +152,8 @@ map <C-m> :SyntasticToggleMode<CR>
 map <C-k> :SyntasticCheck<CR>
 nmap <F8> :TagbarToggle<CR>
 
+au BufRead,BufNewFile *.why,*.mlw set filetype=why3
+
 " Merlin (OCaml)
 if executable('opam')
     au BufRead,BufNewFile *.ml,*.mli compiler ocaml
@@ -170,7 +173,11 @@ augroup fmt
   autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
+
+let g:neoformat_enabled_javascript = []
+
 " ale
 let g:ale_completion_enabled = 1
 let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc'], 'ocaml': ['merlin']}
 let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat']}
+

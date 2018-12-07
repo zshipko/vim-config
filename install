@@ -15,9 +15,10 @@ esac
 
 case $1 in
     vim)
-        mkdir -p ~/.vim/colors
+        mkdir -p ~/.vim/colors ~/.vim/syntax
         cp init.vim ~/.vimrc
         cp newdefault.vim ~/.vim/colors/newdefault.vim
+        cp -r ./syntax/* ~/.vim/syntax
         $VIM +'PlugInstall --sync' +qa
         if [ ! -f ~/.vim/plugged/clang_complete/.modified ]; then
             sed -i "s/vim/$VIM/g" ~/.vim/plugged/clang_complete/Makefile
@@ -28,9 +29,10 @@ case $1 in
             $MAKE install
         ;;
     nvim|neovim)
-        mkdir -p ~/.config/nvim/colors
+        mkdir -p ~/.config/nvim/colors ~/.config/nvim/syntax
         cp init.vim ~/.config/nvim
         cp newdefault.vim ~/.config/nvim/colors/newdefault.vim
+        cp -r ./syntax/* ~/.config/nvim/syntax/
         $NVIM +'PlugInstall --sync' +qa
         if [ ! -f ~/.config/nvim/plugged/clang_complete/.modified ]; then
             sed -i "s/vim/$NVIM/g" ~/.config/nvim/plugged/clang_complete/Makefile
