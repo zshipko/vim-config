@@ -96,13 +96,18 @@ set incsearch
 " Expand tabs
 set expandtab
 set smarttab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 autocmd FileType ocaml set tabstop=2|set shiftwidth=2|set expandtab
 
 
 " Use tabs in Makefiles
-autocmd FileType make setlocal noexpandtab
+autocmd FileType make setlocal tabstop=4|set shiftwidth=4|set noexpandtab
+
+" Use 4 spaces in some languages
+autocmd FileType python set tabstop=4|set shiftwidth=4|set
+autocmd FileType rust set tabstop=4|set shiftwidth=4|set
+autocmd FileType javascript set tabstop=4|set shiftwidth=4|set
 
 " Auto indent and smart indent
 set ai
