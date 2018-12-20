@@ -105,9 +105,9 @@ autocmd FileType ocaml set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType make setlocal tabstop=4|set shiftwidth=4|set noexpandtab
 
 " Use 4 spaces in some languages
-autocmd FileType python set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType rust set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType rust set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab
 
 " Auto indent and smart indent
 set ai
