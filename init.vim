@@ -44,6 +44,7 @@ Plug 'bohlender/vim-z3-smt2'
 Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
 Plug 'whonore/Coqtail'
+Plug 'ARM9/arm-syntax-vim'
 call plug#end()
 
 filetype plugin on
@@ -183,6 +184,13 @@ let g:neoformat_enabled_javascript = []
 
 " ale
 let g:ale_completion_enabled = 1
-let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc'], 'ocaml': ['merlin']}
-let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat']}
+let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc'], 'ocaml': ['merlin'], 'rust': ['rustc', 'cargo']}
+let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat'], 'rust': ['rustfmt']}
 
+let g:ale_asm_gcc_executable = "clang"
+
+function ASM(target)
+  let g:ale_asm_gcc_executable = "clang --target=aarch64-unknown-none"
+endfunction
+
+let g:go_version_warning = 0
