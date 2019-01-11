@@ -186,11 +186,6 @@ let g:neoformat_enabled_javascript = []
 let g:ale_completion_enabled = 1
 let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc'], 'ocaml': ['merlin'], 'rust': ['rustc', 'cargo']}
 let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat'], 'rust': ['rustfmt']}
-
-let g:ale_asm_gcc_executable = "clang"
-
-function ASM(target)
-  let g:ale_asm_gcc_executable = "clang --target=aarch64-unknown-none"
-endfunction
+let g:ale_asm_gcc_executable = ""
 
 let g:go_version_warning = 0
