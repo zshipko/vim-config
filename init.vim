@@ -184,7 +184,7 @@ let g:neoformat_enabled_javascript = []
 
 " ale
 let g:ale_completion_enabled = 1
-let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc'], 'ocaml': ['merlin'], 'rust': ['rustc', 'cargo']}
+let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc'], 'ocaml': ['merlin']}
 let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat'], 'rust': ['rustfmt']}
 let g:ale_asm_gcc_executable = ""
 
