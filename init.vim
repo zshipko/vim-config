@@ -182,7 +182,8 @@ augroup END
 let g:neoformat_enabled_javascript = []
 
 " ale
+let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
-let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc'], 'ocaml': ['merlin']}
+let g:ale_linters = {'c': ['clang'], 'cpp': ['clang'], 'ocaml': ['merlin']}
 let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocp-indent', 'ocamlformat']}
 
