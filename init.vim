@@ -45,6 +45,7 @@ Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
 Plug 'whonore/Coqtail'
 Plug 'ARM9/arm-syntax-vim'
+Plug 'jakwings/vim-pony'
 call plug#end()
 
 filetype plugin on
