@@ -191,3 +191,7 @@ let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['o
 let g:ale_asm_gcc_executable = ""
 
 let g:go_version_warning = 0
+
+au BufRead,BufNewFile *.fountain set filetype=fountain
+autocmd BufNewFile,BufRead *.md set ft=markdown spell
+autocmd BufNewFile,BufRead *.fountain set ft=fountain spell
