@@ -20,13 +20,6 @@ case $1 in
         cp newdefault.vim ~/.vim/colors/newdefault.vim
         cp -r ./syntax/* ~/.vim/syntax
         $VIM +'PlugInstall --sync' +qa
-        if [ ! -f ~/.vim/plugged/clang_complete/.modified ]; then
-            sed -i "s/vim/$VIM/g" ~/.vim/plugged/clang_complete/Makefile
-            touch ~/.vim/plugged/clang_complete/.modified
-        fi
-        cd ~/.vim/plugged/clang_complete && \
-            $MAKE && \
-            $MAKE install
         ;;
     nvim|neovim)
         mkdir -p ~/.config/nvim/colors ~/.config/nvim/syntax
@@ -34,13 +27,6 @@ case $1 in
         cp newdefault.vim ~/.config/nvim/colors/newdefault.vim
         cp -r ./syntax/* ~/.config/nvim/syntax/
         $NVIM +'PlugInstall --sync' +qa
-        if [ ! -f ~/.config/nvim/plugged/clang_complete/.modified ]; then
-            sed -i "s/vim/$NVIM/g" ~/.config/nvim/plugged/clang_complete/Makefile
-            touch ~/.config/nvim/plugged/clang_complete/.modified
-        fi
-        cd ~/.config/nvim/plugged/clang_complete && \
-            $MAKE && \
-            $MAKE install
         ;;
     all|both)
         $0 vim

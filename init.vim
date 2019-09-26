@@ -1,12 +1,3 @@
-" Set the clang path for clang_complete
-if (match(system('uname -s'), 'Darwin') >= 0)
-    let g:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
-elseif !empty($CLANG_PATH)
-    let g:clang_library_path=$CLANG_PATH
-else
-    let g:clang_library_path=system('echo -n `llvm-config --prefix`/lib')
-endif
-
 if has('nvim')
     " Download Plug if needed
     if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -33,19 +24,20 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'let-def/vimbufsync'
-Plug 'Rip-Rip/clang_complete'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
-Plug 'davidhalter/jedi-vim'
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
 Plug 'bohlender/vim-z3-smt2'
 Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
 Plug 'ARM9/arm-syntax-vim'
 Plug 'flowtype/vim-flow'
 Plug 'ziglang/zig.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 call plug#end()
 
 filetype plugin on
@@ -195,3 +187,18 @@ let g:go_version_warning = 0
 au BufRead,BufNewFile *.fountain set filetype=fountain
 autocmd BufNewFile,BufRead *.md set ft=markdown spell
 autocmd BufNewFile,BufRead *.fountain set ft=fountain spell
+
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'cpp': ['clangd'],
+    \ 'c': ['clangd'],
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR><Paste>
