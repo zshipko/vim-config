@@ -17,7 +17,7 @@ else
     " Begin Plug block
     call plug#begin('~/.vim/plugged')
 endif
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ervandew/supertab'
 Plug 'terryma/vim-multiple-cursors'

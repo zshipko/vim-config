@@ -4,15 +4,6 @@ UNAME=$(uname)
 VIM=${VIM-vim}
 NVIM=${NVIM-nvim}
 
-case $UNAME in
-    *BSD)
-        MAKE=gmake
-        ;;
-    *)
-        MAKE=make
-        ;;
-esac
-
 case $1 in
     vim)
         mkdir -p ~/.vim/colors ~/.vim/syntax
