@@ -193,8 +193,8 @@ set hidden
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
     \ 'python': ['/usr/local/bin/pyls'],
-    \ 'cpp': ['clangd'],
-    \ 'c': ['clangd'],
+    \ 'cpp': ['clangd', '-background-index'],
+    \ 'c': ['clangd', '-background-index'],
     \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
