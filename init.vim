@@ -34,6 +34,7 @@ Plug 'fatih/vim-go'
 Plug 'ARM9/arm-syntax-vim'
 Plug 'flowtype/vim-flow'
 Plug 'ziglang/zig.vim'
+Plug 'jparise/vim-graphql'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
