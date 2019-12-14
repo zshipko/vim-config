@@ -202,4 +202,29 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR><Paste>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+command -nargs=+ HalideBuild call HalideBuild(<f-args>)
+function HalideBuild(...)
+  execute "!halide build " . a:1 . " %:p"
+endfunction
+
+command -nargs=+ HalideBuildGen call HalideBuildGen(<f-args>)
+function HalideBuildGen(...)
+  execute "!halide build -g " . a:1 . " %:p " . (a:0 > 1 ? a:2 : "")
+endfunction
+
+command -nargs=+ HalideRun call HalideRun(<f-args>)
+function HalideRun(...)
+  execute "!halide run %:p " . <q-args>
+endfunction
+
+command -nargs=+ HalideGen call HalideGen(<f-args>)
+function HalideGen(...)
+  execute "!halide run -g %:p " . <q-args>
+endfunction
+
+command -nargs=1 Show call Show(<f-args>)
+function Show(name)
+  execute "!$IMAGE_EDITOR " . a:name
+endfunction
