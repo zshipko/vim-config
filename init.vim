@@ -216,12 +216,12 @@ endfunction
 
 command -nargs=+ HalideRun call HalideRun(<f-args>)
 function HalideRun(...)
-  execute "!halide run %:p " . <q-args>
+  execute "!halide run %:p -- " . join(a:000, ' ')
 endfunction
 
 command -nargs=+ HalideGen call HalideGen(<f-args>)
 function HalideGen(...)
-  execute "!halide run -g %:p " . <q-args>
+  execute "!halide run -g %:p -- " . join(a:000, ' ')
 endfunction
 
 command -nargs=1 Show call Show(<f-args>)
