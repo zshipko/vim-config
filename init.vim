@@ -40,6 +40,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'CraneStation/cranelift.vim'
 call plug#end()
 
 filetype plugin on
