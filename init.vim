@@ -179,9 +179,18 @@ let g:neoformat_enabled_javascript = []
 " ale
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
-let g:ale_linters = {'c': ['clang', 'clang-tidy'], 'cpp': ['clang', 'clang-tidy'], 'ocaml': ['merlin']}
+let g:ale_linters = {'c': ['clang', 'clang-tidy'], 'cpp': [ 'clang', 'clang-tidy'], 'ocaml': ['merlin']}
 let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocamlformat'], 'rust': ['rustfmt']}
 let g:ale_asm_gcc_executable = ""
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++17'
+
+let g:ale_c_clang_options = '-Wall -O2 -std=c11'
+let g:ale_cpp_clang_options = '-Wall -O2 -std=c++17'
+
+let g:ale_cpp_clangtidy_options = '-Wall -std=c++17 -x c++'
+let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++17 -x c++'
 
 let g:go_version_warning = 0
 
@@ -194,8 +203,8 @@ set hidden
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
     \ 'python': ['/usr/local/bin/pyls'],
-    \ 'cpp': ['clangd', '-background-index'],
-    \ 'c': ['clangd', '-background-index'],
+    \ 'cpp': ['clangd', '-background-index', '--', '-std=c++17'],
+    \ 'c': ['clangd', '-background-index', '--', '-std=c11'],
     \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
