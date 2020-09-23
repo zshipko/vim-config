@@ -1,33 +1,10 @@
 #!/usr/bin/env sh
 
 UNAME=$(uname)
-VIM=${VIM-vim}
 NVIM=${NVIM-nvim}
 
-case $1 in
-    vim)
-        mkdir -p ~/.vim/colors ~/.vim/syntax
-        cp init.vim ~/.vimrc
-        cp newdefault.vim ~/.vim/colors/newdefault.vim
-        cp -r ./syntax/* ~/.vim/syntax
-        $VIM +'PlugInstall --sync' +qa
-        ;;
-    nvim|neovim)
-        mkdir -p ~/.config/nvim/colors ~/.config/nvim/syntax
-        cp init.vim ~/.config/nvim
-        cp newdefault.vim ~/.config/nvim/colors/newdefault.vim
-        cp -r ./syntax/* ~/.config/nvim/syntax/
-        $NVIM +'PlugInstall --sync' +qa
-        ;;
-    all|both)
-        $0 vim
-        $0 neovim
-        ;;
-    deps)
-        cargo install racer
-        opam install ocp-indent ocamlformat merlin
-        ;;
-    *)
-        echo "Invalid vim executable name"
-        ;;
-esac
+mkdir -p ~/.config/nvim/colors ~/.config/nvim/syntax
+cp init.vim ~/.config/nvim
+cp newdefault.vim ~/.config/nvim/colors/newdefault.vim
+cp -r ./syntax/* ~/.config/nvim/syntax/
+$NVIM +'PlugInstall --sync' +qa

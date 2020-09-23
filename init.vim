@@ -27,7 +27,7 @@ Plug 'let-def/vimbufsync'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
-Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim'
 Plug 'bohlender/vim-z3-smt2'
 Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
@@ -203,7 +203,7 @@ autocmd BufNewFile,BufRead *.fountain set ft=fountain spell
 set hidden
 
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+    \ 'rust': ['~/.local/bin/rust-analyzer'],
     \ 'python': ['/usr/local/bin/pyls'],
     \ 'cpp': ['clangd', '-background-index', '--', '-std=c++17'],
     \ 'c': ['clangd', '-background-index', '--', '-std=c11'],
