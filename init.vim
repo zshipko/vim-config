@@ -41,6 +41,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plug 'CraneStation/cranelift.vim'
+Plug 'neomake/neomake'
 call plug#end()
 
 filetype plugin on
@@ -239,3 +240,6 @@ command -nargs=1 Show call Show(<f-args>)
 function Show(name)
   execute "!$IMAGE_EDITOR " . a:name
 endfunction
+
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
