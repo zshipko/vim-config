@@ -175,7 +175,6 @@ augroup fmt
   autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
-
 let g:neoformat_enabled_javascript = []
 
 " ale
@@ -201,6 +200,8 @@ autocmd BufNewFile,BufRead *.md set ft=markdown spell
 autocmd BufNewFile,BufRead *.fountain set ft=fountain spell
 
 set hidden
+
+autocmd BufWritePre *.rs :call LanguageClient#textDocument_formatting_sync()
 
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.local/bin/rust-analyzer'],
