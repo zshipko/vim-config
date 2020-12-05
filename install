@@ -7,4 +7,5 @@ mkdir -p ~/.config/nvim/colors ~/.config/nvim/syntax
 cp init.vim ~/.config/nvim
 cp newdefault.vim ~/.config/nvim/colors/newdefault.vim
 cp -r ./syntax/* ~/.config/nvim/syntax/
+cp tmux.conf ~/.tmux.conf
 $NVIM +'PlugInstall --sync' +qa
