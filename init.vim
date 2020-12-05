@@ -27,13 +27,10 @@ Plug 'let-def/vimbufsync'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
-"Plug 'rust-lang/rust.vim'
 Plug 'bohlender/vim-z3-smt2'
 Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
 Plug 'ARM9/arm-syntax-vim'
-Plug 'flowtype/vim-flow'
-Plug 'ziglang/zig.vim'
 Plug 'jparise/vim-graphql'
 Plug 'rhysd/rust-doc.vim'
 Plug 'autozimu/LanguageClient-neovim', {
@@ -162,7 +159,6 @@ if executable('opam')
     au BufRead,BufNewFile *.ml,*.mli compiler ocaml
     let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
     execute "set rtp+=" . g:opamshare . "/merlin/vim"
-    let g:syntastic_ocaml_checkers = ['merlin']
     map <Leader>d :MerlinLocate<CR>
 endif
 set rtp^="/home/zach/.opam/4.07.0/share/ocp-indent/vim"
@@ -241,5 +237,4 @@ function Show(name)
   execute "!$IMAGE_EDITOR " . a:name
 endfunction
 
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
