@@ -148,9 +148,6 @@ if argc() == 0 && !exists("s:std_in")
     autocmd VimEnter * NERDTree
 endif
 map <C-f> :NERDTreeToggle<CR>
-
-map <C-m> :SyntasticToggleMode<CR>
-map <C-k> :SyntasticCheck<CR>
 nmap <F8> :TagbarToggle<CR>
 
 au BufRead,BufNewFile *.why,*.mlw set filetype=why3
