@@ -159,7 +159,6 @@ if executable('opam')
     execute "set rtp+=" . g:opamshare . "/merlin/vim"
     map <Leader>d :MerlinLocate<CR>
 endif
-set rtp^="/home/zach/.opam/4.07.0/share/ocp-indent/vim"
 
 " Jedi (Python)
 let g:jedi#popup_on_dot = 0
