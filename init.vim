@@ -40,6 +40,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'CraneStation/cranelift.vim'
 Plug 'neomake/neomake'
 Plug 'whonore/Coqtail'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 filetype plugin on
