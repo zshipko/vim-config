@@ -176,7 +176,7 @@ let g:neoformat_enabled_javascript = []
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_linters = {'c': ['clang', 'clang-tidy'], 'cpp': [ 'clang', 'clang-tidy'], 'ocaml': ['merlin']}
-let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocamlformat'], 'rust': ['rustfmt']}
+let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocamlformat'], 'rust': ['rustfmt'], "typescript": ["deno"]}
 let g:ale_asm_gcc_executable = ""
 
 let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
@@ -203,6 +203,7 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['/usr/local/bin/pyls'],
     \ 'cpp': ['clangd', '-background-index', '--', '-std=c++17'],
     \ 'c': ['clangd', '-background-index', '--', '-std=c11'],
+    \ 'typescript': ['deno', 'lsp'],
     \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
