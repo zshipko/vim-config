@@ -201,8 +201,8 @@ autocmd BufWritePre *.rs :call LanguageClient#textDocument_formatting_sync()
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.local/bin/rust-analyzer'],
     \ 'python': ['/usr/local/bin/pyls'],
-    \ 'cpp': ['clangd', '-background-index', '--', '-std=c++17'],
-    \ 'c': ['clangd', '-background-index', '--', '-std=c11'],
+    \ 'cpp': ['clangd', '-background-index'],
+    \ 'c': ['clangd', '-background-index'],
     \ 'typescript': ['deno', 'lsp'],
     \ }
 

@@ -8,4 +8,15 @@ cp init.vim ~/.config/nvim
 cp newdefault.vim ~/.config/nvim/colors/newdefault.vim
 cp -r ./syntax/* ~/.config/nvim/syntax/
 cp tmux.conf ~/.tmux.conf
+
+if [ -e ~/.bashrc ]; then
+  if grep -q 'alias open="xdg-open"' ~/.bashrc; then
+    echo "bashrc already congigured, make sure it matches"
+  else
+    cat bashrc >> ~/.bashrc
+  fi
+else
+  cp bashrc ~/.bashrc
+fi
+
 $NVIM +'PlugInstall --sync' +qa
