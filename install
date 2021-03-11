@@ -11,7 +11,7 @@ cp tmux.conf ~/.tmux.conf
 
 if [ -e ~/.bashrc ]; then
   if grep -q 'alias open="xdg-open"' ~/.bashrc; then
-    echo "bashrc already congigured, make sure it matches"
+    echo "bashrc already configured, make sure it matches"
   else
     cat bashrc >> ~/.bashrc
   fi
