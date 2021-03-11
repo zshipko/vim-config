@@ -1,4 +1,7 @@
 alias open="xdg-open"
+if [ -e "/usr/share/autojump/autojump.sh" ]; then
+  source "/usr/share/autojump/autojump.sh"
+fi
 alias j="autojump"
 alias copy="xclip -i -sel clip"
 alias paste="xclip -i -sel clip"
