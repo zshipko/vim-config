@@ -28,7 +28,7 @@ Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'bohlender/vim-z3-smt2'
-Plug 'sbdchd/neoformat'
+"Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
 Plug 'ARM9/arm-syntax-vim'
 Plug 'jparise/vim-graphql'
@@ -76,8 +76,8 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 set cmdheight=2
 
 " Remove complete buffers automatically
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " Show position in status line
 set ruler
@@ -165,10 +165,10 @@ endif
 let g:jedi#popup_on_dot = 0
 
 " Neoformat
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
+"augroup fmt
+"  autocmd!
+"  autocmd BufWritePre * undojoin | Neoformat
+"augroup END
 
 let g:neoformat_enabled_javascript = []
 
@@ -238,3 +238,4 @@ function Show(name)
 endfunction
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+set ttimeoutlen=2
