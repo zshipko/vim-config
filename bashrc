@@ -14,5 +14,8 @@ fi
 
 PS1+='\[\e[0;96m\]\u\[\e[0m\]@\[\e[0;92m\]\H\[\e[0m\]:\[\e[0;93m\]$(git branch 2>/dev/null | grep '"'"'^*'"'"' | colrm 1 2) \[\e[0m\]\w\n\[\e[0m\]\$ \[\e[0m\]'
 export PS1
-export PATH="home/zach/.cargo/bin:$PATH"
-eval "$(fnm env --multi 2>& /dev/null)"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+source "$HOME/.cargo/env"
+
+eval "$(fnm env 2> /dev/null)"
