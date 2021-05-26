@@ -237,12 +237,3 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
-
-
-    let g:modus_moody_enable = 1
-    let g:modus_yellow_comments = 1
-    let g:modus_green_strings = 1
-    let g:modus_faint_syntax = 1
-    let g:modus_cursorline_intense = 1
-    let g:modus_termtrans_enable = 1
-
