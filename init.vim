@@ -6,8 +6,7 @@ endif
 
 " Begin Plug block
 call plug#begin('~/.config/nvim/plugged')
-Plug 'marko-cerovac/material.nvim'
-Plug 'navarasu/onedark.nvim'
+Plug 'tomasiser/vim-code-dark'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
@@ -108,9 +107,7 @@ set backupdir=/tmp
 set mouse=a
 
 " Colorscheme
-let g:material_style = 'darker'
-let g:material_variable_color = 'white'
-colorscheme material
+colorscheme codedark
 
 " Status bar
 set laststatus=2
