@@ -6,6 +6,7 @@ endif
 
 " Begin Plug block
 call plug#begin('~/.config/nvim/plugged')
+Plug 'tomasiser/vim-code-dark'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
@@ -113,7 +114,8 @@ set backupdir=/tmp
 set mouse=a
 
 " Colorscheme
-colorscheme newdefault
+" colorscheme newdefault
+colorscheme codedark
 
 " Status bar
 set laststatus=2
@@ -189,12 +191,12 @@ set ttimeoutlen=2
 lua << EOF
 require'lspconfig'.rust_analyzer.setup{}
 require'lspconfig'.ocamllsp.setup{}
-require'lspconfig'.pyls.setup{}
+require'lspconfig'.pyright.setup{}
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.tsserver.setup{}
+require'lspconfig'.zls.setup{}
+require'lspconfig'.gopls.setup{}
 EOF
-
-
 
 
 " compe
@@ -204,7 +206,7 @@ require'compe'.setup {
   enabled = true;
   autocomplete = true;
   debug = false;
-  min_length = 1;
+  min_length = 2;
   preselect = 'enable';
   throttle_time = 80;
   source_timeout = 200;
