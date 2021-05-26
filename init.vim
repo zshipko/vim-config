@@ -6,7 +6,8 @@ endif
 
 " Begin Plug block
 call plug#begin('~/.config/nvim/plugged')
-Plug 'tomasiser/vim-code-dark'
+Plug 'marko-cerovac/material.nvim'
+Plug 'navarasu/onedark.nvim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
@@ -26,6 +27,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 
 " dependencies
 Plug 'nvim-lua/popup.nvim'
@@ -49,11 +52,6 @@ set autoread
 " Map single-quote to color to avoid shift
 map ' :
 
-" Completion settings
-set omnifunc=syntaxcomplete#Complete
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
-
 " Strip trailing whitespace on write
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -65,10 +63,6 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Command bar height
 set cmdheight=2
-
-" Remove complete buffers automatically
-"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " Show position in status line
 set ruler
@@ -114,8 +108,9 @@ set backupdir=/tmp
 set mouse=a
 
 " Colorscheme
-" colorscheme newdefault
-colorscheme codedark
+let g:material_style = 'darker'
+let g:material_variable_color = 'white'
+colorscheme material
 
 " Status bar
 set laststatus=2
@@ -145,44 +140,11 @@ nmap <F8> :TagbarToggle<CR>
 
 au BufRead,BufNewFile *.why,*.mlw set filetype=why3
 
-" Merlin (OCaml)
-"if executable('opam')
-"    au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-"    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-"    execute "set rtp+=" . g:opamshare . "/merlin/vim"
-"    map <Leader>d :MerlinLocate<CR>
-"endif
-
 au BufRead,BufNewFile *.fountain set filetype=fountain
 autocmd BufNewFile,BufRead *.md set ft=markdown spell
 autocmd BufNewFile,BufRead *.fountain set ft=fountain spell
 
 set hidden
-
-command -nargs=+ HalideBuild call HalideBuild(<f-args>)
-function HalideBuild(...)
-  execute "!halide build " . a:1 . " %:p"
-endfunction
-
-command -nargs=+ HalideBuildGen call HalideBuildGen(<f-args>)
-function HalideBuildGen(...)
-  execute "!halide build -g " . a:1 . " %:p " . (a:0 > 1 ? a:2 : "")
-endfunction
-
-command -nargs=+ HalideRun call HalideRun(<f-args>)
-function HalideRun(...)
-  execute "!halide run %:p -- " . join(a:000, ' ')
-endfunction
-
-command -nargs=+ HalideGen call HalideGen(<f-args>)
-function HalideGen(...)
-  execute "!halide run -g %:p -- " . join(a:000, ' ')
-endfunction
-
-command -nargs=1 Show call Show(<f-args>)
-function Show(name)
-  execute "!$IMAGE_EDITOR " . a:name
-endfunction
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 set ttimeoutlen=2
@@ -197,7 +159,6 @@ require'lspconfig'.tsserver.setup{}
 require'lspconfig'.zls.setup{}
 require'lspconfig'.gopls.setup{}
 EOF
-
 
 " compe
 lua << EOF
@@ -268,4 +229,23 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader> F    <cmd>lua vim.lsp.buf.formatting()<CR>
 autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = {  }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,  -- false will disable the whole extension
+    disable = { },  -- list of language that will be disabled
+  },
+}
+EOF
+
+
+    let g:modus_moody_enable = 1
+    let g:modus_yellow_comments = 1
+    let g:modus_green_strings = 1
+    let g:modus_faint_syntax = 1
+    let g:modus_cursorline_intense = 1
+    let g:modus_termtrans_enable = 1
 
