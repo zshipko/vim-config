@@ -17,9 +17,7 @@ else
     " Begin Plug block
     call plug#begin('~/.vim/plugged')
 endif
-Plug 'dense-analysis/ale'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'ervandew/supertab'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
@@ -28,19 +26,23 @@ Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'bohlender/vim-z3-smt2'
-Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
 Plug 'ARM9/arm-syntax-vim'
 Plug 'jparise/vim-graphql'
 Plug 'rhysd/rust-doc.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug 'CraneStation/cranelift.vim'
 Plug 'neomake/neomake'
 Plug 'whonore/Coqtail'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+
+" dependencies
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+" telescope
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 filetype plugin on
@@ -154,40 +156,14 @@ nmap <F8> :TagbarToggle<CR>
 au BufRead,BufNewFile *.why,*.mlw set filetype=why3
 
 " Merlin (OCaml)
-if executable('opam')
-    au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-    execute "set rtp+=" . g:opamshare . "/merlin/vim"
-    map <Leader>d :MerlinLocate<CR>
-endif
-
-" Jedi (Python)
-let g:jedi#popup_on_dot = 0
-
-" Neoformat
-"augroup fmt
-"  autocmd!
-"  autocmd BufWritePre * undojoin | Neoformat
-"augroup END
-
-let g:neoformat_enabled_javascript = []
+"if executable('opam')
+"    au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+"    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+"    execute "set rtp+=" . g:opamshare . "/merlin/vim"
+"    map <Leader>d :MerlinLocate<CR>
+"endif
 
 " ale
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
-let g:ale_linters = {'c': ['clang', 'clang-tidy'], 'cpp': [ 'clang', 'clang-tidy'], 'ocaml': ['merlin']}
-let g:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format'], 'ocaml': ['ocamlformat'], 'rust': ['rustfmt'], "typescript": ["deno"]}
-let g:ale_asm_gcc_executable = ""
-
-let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++17'
-
-let g:ale_c_clang_options = '-Wall -O2 -std=c11'
-let g:ale_cpp_clang_options = '-Wall -O2 -std=c++17'
-
-let g:ale_cpp_clangtidy_options = '-Wall -std=c++17 -x c++'
-let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++17 -x c++'
-
 let g:go_version_warning = 0
 
 au BufRead,BufNewFile *.fountain set filetype=fountain
@@ -195,22 +171,6 @@ autocmd BufNewFile,BufRead *.md set ft=markdown spell
 autocmd BufNewFile,BufRead *.fountain set ft=fountain spell
 
 set hidden
-
-autocmd BufWritePre *.rs :call LanguageClient#textDocument_formatting_sync()
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.local/bin/rust-analyzer'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ 'cpp': ['clangd', '-background-index'],
-    \ 'c': ['clangd', '-background-index'],
-    \ 'typescript': ['deno', 'lsp'],
-    \ }
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 command -nargs=+ HalideBuild call HalideBuild(<f-args>)
 function HalideBuild(...)
@@ -239,3 +199,86 @@ endfunction
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 set ttimeoutlen=2
+
+" lspconfig
+lua << EOF
+require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.ocamllsp.setup{}
+require'lspconfig'.pyls.setup{}
+require'lspconfig'.clangd.setup{}
+require'lspconfig'.tsserver.setup{}
+EOF
+
+
+
+
+" compe
+lua << EOF
+-- Compe setup
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    nvim_lsp = true;
+  };
+}
+
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local check_back_space = function()
+    local col = vim.fn.col('.') - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        return true
+    else
+        return false
+    end
+end
+
+-- Use (s-)tab to:
+--- move to prev/next item in completion menuone
+--- jump to prev/next snippet's placeholder
+_G.tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-n>"
+  elseif check_back_space() then
+    return t "<Tab>"
+  else
+    return vim.fn['compe#complete']()
+  end
+end
+_G.s_tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-p>"
+  else
+    return t "<S-Tab>"
+  end
+end
+
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+EOF
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+nnoremap <leader> F    <cmd>lua vim.lsp.buf.formatting()<CR>
+autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)
+
