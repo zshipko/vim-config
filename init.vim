@@ -1,22 +1,11 @@
-if has('nvim')
-    " Download Plug if needed
-    if empty(glob('~/.config/nvim/autoload/plug.vim'))
-      silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      autocmd VimEnter * PlugInstall
-    endif
-
-    " Begin Plug block
-    call plug#begin('~/.config/nvim/plugged')
-else
-    " Download Plug if needed
-    if empty(glob('~/.vim/plugged'))
-      silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      autocmd VimEnter * PlugInstall
-    endif
-
-    " Begin Plug block
-    call plug#begin('~/.vim/plugged')
+" Download Plug if needed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
 endif
+
+" Begin Plug block
+call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
@@ -26,7 +15,6 @@ Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'bohlender/vim-z3-smt2'
-Plug 'fatih/vim-go'
 Plug 'ARM9/arm-syntax-vim'
 Plug 'jparise/vim-graphql'
 Plug 'rhysd/rust-doc.vim'
@@ -162,9 +150,6 @@ au BufRead,BufNewFile *.why,*.mlw set filetype=why3
 "    execute "set rtp+=" . g:opamshare . "/merlin/vim"
 "    map <Leader>d :MerlinLocate<CR>
 "endif
-
-" ale
-let g:go_version_warning = 0
 
 au BufRead,BufNewFile *.fountain set filetype=fountain
 autocmd BufNewFile,BufRead *.md set ft=markdown spell
