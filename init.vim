@@ -237,3 +237,5 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+
+map <Space> <Leader>
