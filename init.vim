@@ -6,7 +6,7 @@ endif
 
 " Begin Plug block
 call plug#begin('~/.config/nvim/plugged')
-Plug 'tomasiser/vim-code-dark'
+Plug 'sainnhe/edge'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
@@ -107,7 +107,40 @@ set backupdir=/tmp
 set mouse=a
 
 " Colorscheme
-colorscheme codedark
+
+function! s:edge_custom() abort
+  " Initialize the color palette.
+  " The parameter is a valid value for `g:edge_style`,
+  let l:palette = edge#get_palette('default')
+  " Define a highlight group.
+  " The first parameter is the name of a highlight group,
+  " the second parameter is the foreground color,
+  " the third parameter is the background color,
+  " the fourth parameter is for UI highlighting which is optional,
+  " and the last parameter is for `guisp` which is also optional.
+  " See `autoload/edge.vim` for the format of `l:palette`.
+  "call edge#highlight('Type', l:palette.blue, l:palette.none)
+  "call edge#highlight('Structure', l:palette.blue, l:palette.none)
+  "call edge#highlight('StorageClass', l:palette.blue, l:palette.none)
+  highlight! link TSSymbol Blue
+  highlight! link TSConstant Blue
+  highlight! link TSParameter White
+  highlight! link TSParameterReference White
+  highlight! link TSVariable White
+  highlight! link TSField White
+  highlight! link TSProperty White
+endfunction
+
+augroup EdgeCustom
+  autocmd!
+  autocmd ColorScheme edge call s:edge_custom()
+augroup END
+
+
+let g:edge_disable_italic_comment = 1
+let g:diagnostic_line_highlight = 1
+let g:diagnostic_virtual_text = "colored"
+colorscheme edge
 
 " Status bar
 set laststatus=2
@@ -116,7 +149,7 @@ set laststatus=2
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head'
