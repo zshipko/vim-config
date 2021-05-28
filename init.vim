@@ -127,8 +127,8 @@ augroup END
 
 
 let g:edge_disable_italic_comment = 1
-let g:diagnostic_line_highlight = 1
-let g:diagnostic_virtual_text = "colored"
+let g:edge_diagnostic_line_highlight = 1
+let g:edge_diagnostic_virtual_text = 'colored'
 colorscheme edge
 
 " Status bar
