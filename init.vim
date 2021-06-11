@@ -48,8 +48,8 @@ set pastetoggle=<F12>
 " Refresh when changed
 set autoread
 
-" Map single-quote to color to avoid shift
-map ' :
+" Map to avoid shift
+map ; :
 
 " Strip trailing whitespace on write
 fun! <SID>StripTrailingWhitespaces()
