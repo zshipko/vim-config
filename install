@@ -19,6 +19,18 @@ else
   cp bashrc ~/.bashrc
 fi
 
+if [ -e ~/.gdbinit ]; then
+  echo "gdbinit already configured, make sure it matches"
+else
+  cp gdbinit ~/.gdbinit
+fi
+
+if [ -e ~/.lldbinit ]; then
+  echo "lldbinit already configured, make sure it matches"
+else
+  cp lldbinit ~/.lldbinit
+fi
+
 $NVIM +'PlugInstall --sync' +qa
 
 
